@@ -14,7 +14,7 @@ type SnakeCanvasProps = {
 };
 
 const CELLS = 22;
-const PIXELS = 528;
+const PIXELS = 704;
 const CELL_SIZE = PIXELS / CELLS;
 
 const START_SNAKE: Point[] = [
@@ -56,7 +56,7 @@ export function SnakeCanvas({ active, enabled, sessionId, onGameEnd }: SnakeCanv
   const [alive, setAlive] = useState(true);
   const [tickIndex, setTickIndex] = useState(0);
 
-  const delay = useMemo(() => Math.max(62, 150 - score * 5), [score]);
+  const delay = useMemo(() => Math.max(110, 220 - score * 4), [score]);
 
   const draw = useCallback(() => {
     const canvas = canvasRef.current;
@@ -279,7 +279,7 @@ export function SnakeCanvas({ active, enabled, sessionId, onGameEnd }: SnakeCanv
         </div>
       </div>
 
-      <div className="relative mx-auto aspect-square w-full max-w-[528px] overflow-hidden rounded-[1.5rem] border border-emerald-300/30 bg-black shadow-neon">
+      <div className="relative mx-auto aspect-square w-full max-w-[780px] overflow-hidden rounded-[1.5rem] border border-emerald-300/30 bg-black shadow-neon xl:max-w-[820px]">
         <canvas
           className="canvas-crisp h-full w-full touch-none"
           height={PIXELS}

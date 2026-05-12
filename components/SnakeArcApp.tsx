@@ -1,6 +1,6 @@
 'use client';
 
-import { Activity, BadgeDollarSign, CalendarClock, CircleDollarSign, Gamepad2, Loader2, ShieldCheck, Sparkles, WalletCards } from 'lucide-react';
+import { Activity, BadgeDollarSign, CalendarClock, CircleDollarSign, Copy, ExternalLink, Gamepad2, Loader2, ShieldCheck, Sparkles, WalletCards } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 import { type Address } from 'viem';
@@ -226,12 +226,28 @@ export function SnakeArcApp() {
     setShowGameOver(true);
   }
 
+  async function handleOpenFaucet() {
+    try {
+      if (address && navigator.clipboard) {
+        await navigator.clipboard.writeText(address);
+        setTxMessage('Wallet address copied. Select USDC + Arc Testnet on Circle Faucet, paste your wallet, then request testnet USDC.');
+      } else {
+        setTxMessage('Open Circle Faucet, select USDC + Arc Testnet, then paste your wallet address.');
+      }
+    } catch {
+      setTxMessage('Open Circle Faucet, select USDC + Arc Testnet, then paste your wallet address.');
+    }
+
+    window.open('https://faucet.circle.com/', '_blank', 'noopener,noreferrer');
+  }
+
+
   return (
     <main className="relative min-h-screen overflow-hidden px-4 py-5 sm:px-6 lg:px-8">
       <div className="scanline" />
       <div className="pointer-events-none absolute inset-0 bg-arcade-grid bg-[length:42px_42px] opacity-60" />
 
-      <div className="relative z-10 mx-auto max-w-7xl">
+      <div className="relative z-10 mx-auto max-w-[92rem]">
         <header className="mb-8 flex flex-col gap-4 rounded-[2rem] border border-white/10 bg-black/20 p-4 backdrop-blur md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">
             <div className="grid h-12 w-12 place-items-center rounded-2xl border border-emerald-300/30 bg-emerald-300/10 shadow-neon">
@@ -289,7 +305,25 @@ export function SnakeArcApp() {
           </div>
         )}
 
-        <section className="grid gap-6 xl:grid-cols-[1fr_390px]">
+        {isConnected && correctNetwork && (
+          <div className="mb-6 flex flex-col gap-4 rounded-[2rem] border border-cyan-300/25 bg-cyan-300/10 p-5 text-cyan-50 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="font-black">Need Arc Testnet USDC?</p>
+              <p className="mt-1 text-sm text-cyan-50/75">No private key is needed. The button copies your connected wallet and opens Circle Faucet.</p>
+            </div>
+            <button
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-cyan-200/30 bg-cyan-200/15 px-5 py-3 text-sm font-black text-cyan-50 transition hover:-translate-y-0.5 hover:bg-cyan-200/25"
+              onClick={handleOpenFaucet}
+              type="button"
+            >
+              <Copy className="h-4 w-4" />
+              Get Testnet USDC
+              <ExternalLink className="h-4 w-4" />
+            </button>
+          </div>
+        )}
+
+        <section className="grid gap-6 xl:grid-cols-[minmax(0,1.45fr)_320px]">
           <div className="space-y-6">
             <div className="grid gap-4 md:grid-cols-3">
               <button

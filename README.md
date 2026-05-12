@@ -154,3 +154,9 @@ After allowance exists, only the action transaction is needed until allowance is
 ## Important security notes
 
 This is demo/hackathon code for Arc Testnet. For production, add stronger anti-cheat validation, rate limiting, backend verification, replay protection, and a real review before handling real value.
+
+## Faucet without private key
+
+Players do not need any private key to receive testnet USDC. After connecting a wallet on Arc Testnet, use the **Get Testnet USDC** button in the app. It copies the connected wallet address and opens Circle Faucet. On the faucet page, choose **USDC** and **Arc Testnet**, paste the wallet address, then request testnet USDC.
+
+`PRIVATE_KEY` is only for the project owner when deploying the smart contract locally with Hardhat. Never put `PRIVATE_KEY` in Vercel or GitHub.
