@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg: #06100b;
+  --panel: rgba(9, 24, 16, 0.78);
+  --panel-border: rgba(114, 255, 160, 0.22);
+  --green: #48ff8a;
+  --green-soft: rgba(72, 255, 138, 0.18);
+  --cyan: #6ee7ff;
+  --warning: #ffd166;
+  --danger: #ff6b6b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(72, 255, 138, 0.14), transparent 30%),
+    radial-gradient(circle at 84% 10%, rgba(110, 231, 255, 0.12), transparent 28%),
+    radial-gradient(circle at 50% 90%, rgba(82, 64, 255, 0.13), transparent 34%),
+    #06100b;
+  color: #eafff1;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.arcade-panel {
+  border: 1px solid var(--panel-border);
+  background:
+    linear-gradient(180deg, rgba(12, 32, 21, 0.88), rgba(5, 16, 10, 0.76)),
+    radial-gradient(circle at top left, rgba(72, 255, 138, 0.08), transparent 36%);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+}
+
+.neon-border {
+  position: relative;
+}
+
+.neon-border::after {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(72, 255, 138, 0.55), rgba(110, 231, 255, 0.16), rgba(72, 255, 138, 0.08));
+  z-index: -1;
+  filter: blur(13px);
+  opacity: 0.58;
+}
+
+.pixel-title {
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 20px rgba(72, 255, 138, 0.42);
+}
+
+.scanline {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: linear-gradient(rgba(255,255,255,.018) 50%, rgba(0,0,0,.02) 50%);
+  background-size: 100% 4px;
+  mix-blend-mode: overlay;
+  opacity: 0.28;
+}
+
+.canvas-crisp {
+  image-rendering: pixelated;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: .55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+.pulse-glow {
+  animation: pulseGlow 1.8s ease-in-out infinite;
+}
